@@ -226,6 +226,32 @@ public:
             }
             charArray.push_back(nullptr);
             vmkEngine_.reset(NewCustomEngine(charArray.data(), engine_->dictionary(), engine_->macroTable()));
+        } else if (engine_->config().inputMethod.value() == "HybridVN") {
+            static const char* hybridVNKeymap[] = {
+                "z", "XoaDauThanh",
+                "s", "DauSac",
+                "f", "DauHuyen",
+                "r", "DauHoi",
+                "x", "DauNga",
+                "j", "DauNang",
+                "w", "UOA_ƯƠĂ",
+                "a", "A_Â",
+                "e", "E_Ê",
+                "o", "O_Ô",
+                "d", "D_Đ",
+                "0", "XoaDauThanh",
+                "1", "DauSac",
+                "2", "DauHuyen",
+                "3", "DauHoi",
+                "4", "DauNga",
+                "5", "DauNang",
+                "6", "AEO_ÂÊÔ",
+                "7", "UO_ƯƠ",
+                "8", "A_Ă",
+                "9", "D_Đ",
+                nullptr
+            };
+            vmkEngine_.reset(NewCustomEngine(const_cast<char**>(hybridVNKeymap), engine_->dictionary(), engine_->macroTable()));
         } else {
             vmkEngine_.reset(NewEngine(engine_->config().inputMethod->data(), engine_->dictionary(), engine_->macroTable()));
         }
@@ -864,6 +890,7 @@ vmkEngine::vmkEngine(Instance *instance)
     {
         auto imNames = convertToStringList(GetInputMethodNames());
         imNames.push_back("Custom");
+        imNames.push_back("HybridVN");
         imNames_ = std::move(imNames);
     }
     config_.inputMethod.annotation().setList(imNames_);
@@ -904,7 +931,7 @@ vmkEngine::vmkEngine(Instance *instance)
     inputMethodMenu_ = std::make_unique<Menu>();
     inputMethodAction_->setMenu(inputMethodMenu_.get());
 
-    const std::vector<std::string_view> allowedIMs = {"Telex", "VNI", "Telex W"};
+    const std::vector<std::string_view> allowedIMs = {"Telex", "VNI", "Telex W", "HybridVN"};
     for (const auto &imName : imNames_) {
         bool isAllowed = false;
         for (const auto &allowedName : allowedIMs) if (imName == allowedName) { isAllowed = true; break; }

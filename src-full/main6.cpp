@@ -143,8 +143,8 @@ int main(int argc, char **argv) {
     for(auto x : {"vmk1", "vmk2", "vmkpre", "vmk1hc"}) a.c2->add(x);
 
     // CẬP NHẬT CHỈ CÒN 3 OPTION THEO ẢNH
-    a.c3 = add_c("Input:"); 
-    for(auto x : {"Telex", "Telex W", "VNI"}) a.c3->add(x);
+    a.c3 = add_c("Input:");
+    for(auto x : {"Telex", "Telex W", "VNI", "HybridVN"}) a.c3->add(x);
 
     a.c4 = add_c("Charset:"); 
     for(auto x : {"Unicode", "UTF-8", "VNI Windows", "TCVN3 (ABC)", "Unicode tổ hợp"}) a.c4->add(x);

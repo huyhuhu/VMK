@@ -9,7 +9,7 @@ add_library(vmk MODULE ${fcitx_vmk_sources})
 set_target_properties(vmk PROPERTIES OUTPUT_NAME "vmk")
 
 # 3. Liên kết với target 'bamboo'
-target_link_libraries(vmk Fcitx5::Core Fcitx5::Config Bamboo::Core Pthread::Pthread X11::X11) 
+target_link_libraries(vmk Fcitx5::Core Fcitx5::Config Bamboo::Core Threads::Threads X11::X11)
 
 # 4. Include Directories cho target 'bamboo'
 target_include_directories(vmk PRIVATE ${PROJECT_BINARY_DIR})
